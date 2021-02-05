@@ -1,5 +1,9 @@
 const entryDiv = document.querySelector('.entriesDiv')
+const writeEntry = document.querySelector('.writeEntry')
 const button = document.querySelector('button')
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const fullDate = new Date ()
+const date = months[fullDate.getMonth()] + ' ' + fullDate.getDate() + ', ' + fullDate.getHours() + ':' + fullDate.getMinutes()
 
 const getEntries = () =>{
     const diary = JSON.parse(localStorage.getItem('diary'))
@@ -7,7 +11,7 @@ const getEntries = () =>{
         const entries = new Array(diary)
         console.log(entries)
         entries.map(entry => {
-            entryDiv.innerHTML += `<h3>${entry.title}</h3><span>${entry.body}</span>` 
+            entryDiv.innerHTML += `<p>${entry.title}</p><span>${entry.body}</span>` 
         })
     }
 }
@@ -21,25 +25,30 @@ const getInputOrSubmitNewPost = e => {
 }
 
 const displayPost = () => {
-    const title = document.querySelectorAll('input')[0]
-    const body = document.querySelectorAll('input')[1]
+    const body = document.querySelector('#entry')
     const newEntry = document.createElement('div')
-    newEntry.innerHTML = `<p>${title.value}</p><span>${body.value}</span>`
+    newEntry.innerHTML = `<p>${date}</p><span>${body.value}</span>`
     const newObj = {
-        title: title.value, 
-        body: body.value
+        'title': date, 
+        'body': body.value
     }
-    localStorage.setItem('diary', JSON.stringify(newObj))
-    entryDiv.append(newEntry)
+    if (localStorage.getItem('diary')){
+        diary = JSON.parse(localStorage.getItem('diary'))
+        const entries = new Array(diary)
+        const newO = [...entries, newObj]
+        localStorage.setItem('diary', JSON.stringify(newO))
+    } else {
+        localStorage.setItem('diary', JSON.stringify(newObj))
+    }
+    entryDiv.prepend(newEntry)
     button.innerText = "New Post"
-    title.remove()
-    body.remove()
+    writeEntry.remove()
 }
 
 const provideImputForm = () => {
     const newForm = document.createElement('form')
-    newForm.innerHTML = `<input id='title' placeholder='March 3rd...' /><br/><br/><input id='entry' placeholder='Dear Diary...' />`
-    entryDiv.append(newForm)
+    newForm.innerHTML = `<p id='date'>${date}</p><br/><br/><textarea id='entry' placeholder='Dear Diary...' />`
+    writeEntry.prepend(newForm)
     button.innerText = 'Post'
 }
 

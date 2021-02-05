@@ -29,9 +29,18 @@ input{
 input:hover{
     border: 3px solid #A0593A;
 }
-input:active{
+textarea{
+    resize: none;
+    font-family: 'Lobster', cursive;
+    background-color: #F8DDF4;
+    color: #A35E7A;
+    border: 3px solid #B84181;
+    border-radius: 4px;
+}
+textarea:hover{
     border: 3px solid #A0593A;
 }
+
 #entry{
     height: 20vh;
     width: 50vw;
