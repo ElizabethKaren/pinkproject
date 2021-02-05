@@ -10,15 +10,21 @@ const getInputOrSubmitNewPost = e => {
 }
 
 const displayPost = () => {
-    const input = document.querySelector('input')
+    const title = document.querySelectorAll('input')[0]
+    const body = document.querySelectorAll('input')[1]
     const newEntry = document.createElement('div')
-    newEntry.innerText = input.value
+    newEntry.innerHTML = `<h3>${title.value}</h3><span>${body.value}</span>`
+    const newObj = `${body.value}`
+    title.remove()
+    body.remove()
+    localStorage.setItem(`${title.value}`, JSON.stringify(newObj))
     entryDiv.append(newEntry)
+    button.innerText = "New Post"
 }
 
 const provideImputForm = () => {
     const newForm = document.createElement('form')
-    newForm.innerHTML = `<input id='title placeholder='My Day..' /><br/><input id='entry' placeholder='Dear Diary...' />`
+    newForm.innerHTML = `<input id='title placeholder='My Day..' /><br/><br/><input id='entry' placeholder='Dear Diary...' />`
     entryDiv.append(newForm)
     button.innerText = 'Post'
 }
