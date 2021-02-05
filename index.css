@@ -1,0 +1,21 @@
+body{
+    background-color: #F8DDF4;
+    /* background-image: url('./images/bedroom.jpg'); */
+    /* background-repeat: no-repeat;
+    background-attachment: fixed; */
+    background-size: cover;
+    background-size: 100% 100%;
+    overflow: scroll;
+    font-family: 'Lobster', cursive;
+}
+.container{
+    font-size: large;
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    color: #B84181;
+    text-shadow: 3px 3px #FAA262;
+}
+img{
+    border: 3px solid #C06874;
+}
