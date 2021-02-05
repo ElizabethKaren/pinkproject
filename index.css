@@ -16,12 +16,25 @@ body{
     color: #B84181;
     text-shadow: 3px 3px #FAA262;
 }
-#title{
-  
+input{
+    resize: none;
+    font-family: 'Lobster', cursive;
+    background-color: #F8DDF4;
+    color: #A35E7A;
+    border: 3px solid #B84181;
+    border-radius: 4px;
+    overflow: scroll;
+    text-align: justify;
 }
-#entry{;
-    height: 30vh;
-    width: 30vw;
+input:hover{
+    border: 3px solid #A0593A;
+}
+input:active{
+    border: 3px solid #A0593A;
+}
+#entry{
+    height: 20vh;
+    width: 50vw;
 }
 
 button{

@@ -24,20 +24,21 @@ const displayPost = () => {
     const title = document.querySelectorAll('input')[0]
     const body = document.querySelectorAll('input')[1]
     const newEntry = document.createElement('div')
-    newEntry.innerHTML = `<h3>${title.value}</h3><span>${body.value}</span>`
-    const newObj = `title: ${title.value}, body: ${body.value}`
-    const diary = JSON.parse(localStorage.getItem('diary'))
-    const newArray = [diary, newObj]
-    title.remove()
-    body.remove()
-    localStorage.setItem('diary', JSON.stringify(newArray))
+    newEntry.innerHTML = `<p>${title.value}</p><span>${body.value}</span>`
+    const newObj = {
+        title: title.value, 
+        body: body.value
+    }
+    localStorage.setItem('diary', JSON.stringify(newObj))
     entryDiv.append(newEntry)
     button.innerText = "New Post"
+    title.remove()
+    body.remove()
 }
 
 const provideImputForm = () => {
     const newForm = document.createElement('form')
-    newForm.innerHTML = `<input id='title placeholder='My Day..' /><br/><br/><input id='entry' placeholder='Dear Diary...' />`
+    newForm.innerHTML = `<input id='title' placeholder='March 3rd...' /><br/><br/><input id='entry' placeholder='Dear Diary...' />`
     entryDiv.append(newForm)
     button.innerText = 'Post'
 }
