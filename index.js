@@ -1,6 +1,17 @@
 const entryDiv = document.querySelector('.entriesDiv')
 const button = document.querySelector('button')
 
+const getEntries = () =>{
+    const diary = JSON.parse(localStorage.getItem('diary'))
+    if (diary){
+        const entries = new Array(diary)
+        console.log(entries)
+        entries.map(entry => {
+            entryDiv.innerHTML += `<h3>${entry.title}</h3><span>${entry.body}</span>` 
+        })
+    }
+}
+
 const getInputOrSubmitNewPost = e => {
     if (e.target.innerText === "New Post"){
         provideImputForm()
@@ -14,10 +25,12 @@ const displayPost = () => {
     const body = document.querySelectorAll('input')[1]
     const newEntry = document.createElement('div')
     newEntry.innerHTML = `<h3>${title.value}</h3><span>${body.value}</span>`
-    const newObj = `${body.value}`
+    const newObj = `title: ${title.value}, body: ${body.value}`
+    const diary = JSON.parse(localStorage.getItem('diary'))
+    const newArray = [diary, newObj]
     title.remove()
     body.remove()
-    localStorage.setItem(`${title.value}`, JSON.stringify(newObj))
+    localStorage.setItem('diary', JSON.stringify(newArray))
     entryDiv.append(newEntry)
     button.innerText = "New Post"
 }
@@ -42,6 +55,7 @@ const changeFavicon = link => {
   }
 
 document.addEventListener('DOMContentLoaded', function(){
+    getEntries()
     button.addEventListener('click', (e) => getInputOrSubmitNewPost(e))
     changeFavicon("https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/anatomical-heart_1fac0.png")
 })
