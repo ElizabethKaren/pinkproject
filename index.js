@@ -21,6 +21,7 @@ const getInputOrSubmitNewPost = e => {
         provideImputForm()
     } else {
         displayPost()
+        writeEntry.remove()
     }
 }
 
@@ -33,6 +34,7 @@ const displayPost = () => {
         'body': body.value
     }
     if (localStorage.getItem('diary')){
+        /// something going on here 
         diary = JSON.parse(localStorage.getItem('diary'))
         const entries = new Array(diary)
         const newO = [...entries, newObj]
@@ -42,7 +44,6 @@ const displayPost = () => {
     }
     entryDiv.prepend(newEntry)
     button.innerText = "New Post"
-    writeEntry.remove()
 }
 
 const provideImputForm = () => {
