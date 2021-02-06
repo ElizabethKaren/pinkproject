@@ -31,11 +31,12 @@ input:hover{
 }
 textarea{
     resize: none;
-    font-family: 'Lobster', cursive;
     background-color: #F8DDF4;
     color: #A35E7A;
     border: 3px solid #B84181;
     border-radius: 4px;
+    font-style: x-large;
+    font-family: Arial, Helvetica, sans-serif;
 }
 textarea:hover{
     border: 3px solid #A0593A;

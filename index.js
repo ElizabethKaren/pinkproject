@@ -9,9 +9,25 @@ const getEntries = () =>{
     const diary = JSON.parse(localStorage.getItem('diary'))
     if (diary){
         const entries = new Array(diary)
-        console.log(entries)
-        entries.map(entry => {
-            entryDiv.innerHTML += `<p>${entry.title}</p><span>${entry.body}</span>` 
+        goingThroughEntries(entries)
+    }
+}
+
+const goingThroughEntries = array => {
+    console.log(array)
+    if (array[0].length === 1){
+        array.forEach(one => {
+            console.log(one)
+            const newDiv = document.createElement('div')
+            newDiv.innerHTML = `<p>${one['title']}</p><span>${one['body']}</span>`
+            entryDiv.prepend(newDiv)
+        })
+    } else {
+        array[0].forEach(one => {
+            console.log(one)
+            const newDiv = document.createElement('div')
+            newDiv.innerHTML = `<p>${one['title']}</p><span>${one['body']}</span>`
+            entryDiv.prepend(newDiv)
         })
     }
 }
@@ -21,7 +37,7 @@ const getInputOrSubmitNewPost = e => {
         provideImputForm()
     } else {
         displayPost()
-        writeEntry.remove()
+        writeEntry.innerHTML = `<div class='writeEntry'></div>`
     }
 }
 
@@ -30,17 +46,20 @@ const displayPost = () => {
     const newEntry = document.createElement('div')
     newEntry.innerHTML = `<p>${date}</p><span>${body.value}</span>`
     const newObj = {
-        'title': date, 
-        'body': body.value
+        title: date, 
+        body: body.value
     }
     if (localStorage.getItem('diary')){
         /// something going on here 
         diary = JSON.parse(localStorage.getItem('diary'))
+        console.log(diary)
         const entries = new Array(diary)
-        const newO = [...entries, newObj]
+        const newO = entries.concat(newObj)
+        console.log(newO)
         localStorage.setItem('diary', JSON.stringify(newO))
     } else {
-        localStorage.setItem('diary', JSON.stringify(newObj))
+        const newD = newObj
+        localStorage.setItem('diary', JSON.stringify(newD))
     }
     entryDiv.prepend(newEntry)
     button.innerText = "New Post"
@@ -48,7 +67,7 @@ const displayPost = () => {
 
 const provideImputForm = () => {
     const newForm = document.createElement('form')
-    newForm.innerHTML = `<p id='date'>${date}</p><br/><br/><textarea id='entry' placeholder='Dear Diary...' />`
+    newForm.innerHTML = `<p id='date'>${date}</p><textarea id='entry' placeholder='Dear Diary...' />`
     writeEntry.prepend(newForm)
     button.innerText = 'Post'
 }
