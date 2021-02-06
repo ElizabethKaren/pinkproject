@@ -45,21 +45,21 @@ const displayPost = () => {
     const body = document.querySelector('#entry')
     const newEntry = document.createElement('div')
     newEntry.innerHTML = `<p>${date}</p><span>${body.value}</span>`
-    const newObj = {
+    const newObj = [{
         title: date, 
         body: body.value
-    }
+    }]
     if (localStorage.getItem('diary')){
         /// something going on here 
         diary = JSON.parse(localStorage.getItem('diary'))
         console.log(diary)
         const entries = new Array(diary)
-        const newO = entries.concat(newObj)
+        console.log(entries)
+        const newO = [...entries].concat(newObj)
         console.log(newO)
         localStorage.setItem('diary', JSON.stringify(newO))
     } else {
-        const newD = newObj
-        localStorage.setItem('diary', JSON.stringify(newD))
+        localStorage.setItem('diary', JSON.stringify(newObj))
     }
     entryDiv.prepend(newEntry)
     button.innerText = "New Post"
